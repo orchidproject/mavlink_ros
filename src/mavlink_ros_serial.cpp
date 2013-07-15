@@ -35,9 +35,9 @@
 
 #include "mavlink_ros/Mavlink.h"
 #include "sensor_msgs/Imu.h"
-#include "sensor_msgs/MagneticField.h"
-#include "sensor_msgs/Temperature.h"
-#include "sensor_msgs/FluidPressure.h"
+//#include "sensor_msgs/MagneticField.h"
+//#include "sensor_msgs/Temperature.h"
+//#include "sensor_msgs/FluidPressure.h"
 
 #include "mavlink.h"
 #include <glib.h>
@@ -489,7 +489,7 @@ void* serial_wait(void* serial_ptr)
             if (verbose)
               ROS_INFO_THROTTLE(1, "Published IMU message (sys:%d|comp:%d):\n", message.sysid, message.compid);
           }
-          if (mag_pub.getNumSubscribers() > 0)
+          /*if (mag_pub.getNumSubscribers() > 0)
           {
             const double gauss_to_tesla = 1.0e-4;
             sensor_msgs::MagneticFieldPtr mag_msg(new sensor_msgs::MagneticField);
@@ -505,7 +505,7 @@ void* serial_wait(void* serial_ptr)
 
             mag_msg->header = header;
             mag_pub.publish(mag_msg);
-          }
+          }*/
           //TODO: pressure, temperature
           // XXX
         }
@@ -631,7 +631,7 @@ int main(int argc, char **argv)
 
   ros::NodeHandle nh("fcu");
   imu_pub = nh.advertise<sensor_msgs::Imu>("imu", 10);
-  mag_pub = nh.advertise<sensor_msgs::MagneticField>("mag", 10);
+  //mag_pub = nh.advertise<sensor_msgs::MagneticField>("mag", 10);
 
   ros::NodeHandle raw_nh("fcu/raw");
   imu_raw_pub = nh.advertise<sensor_msgs::Imu>("imu", 10);
